@@ -1,0 +1,85 @@
+# depslib dependency file v1.0
+1716424159 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\apiconfigs\curlreducido.c
+	"curlReducido.h"
+	"../env/juego.h"
+
+1716751070 c:\users\admin\n\unlam\ayed\tp\codeincsolution\apiconfigs\curlreducido.h
+	<curl/curl.h>
+	"../env/pregunta.h"
+	"../env/estructuras.h"
+
+1716777120 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\pregunta.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cJSON.h"
+	"estructuras.h"
+
+1716422333 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\cjson.h
+	<stddef.h>
+
+1716777080 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\estructuras.h
+	<windows.h>
+
+1716778418 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\juego.h
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<locale.h>
+	"../apiConfigs/curlReducido.h"
+	"../env/pregunta.h"
+	"../userHandler/jugador.h"
+	"../env/estructuras.h"
+	"../env/teclado.h"
+
+1716424432 c:\users\admin\n\unlam\ayed\tp\codeincsolution\userhandler\jugador.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../env/estructuras.h"
+
+1716747334 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\teclado.h
+	<stdio.h>
+	<ctype.h>
+	<conio.h>
+	<time.h>
+	<unistd.h>
+	"estructuras.h"
+
+1716778715 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\archivos.c
+	"archivos.h"
+
+1716778707 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\archivos.h
+	"juego.h"
+	"estructuras.h"
+
+1716422333 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\cjson.c
+	<string.h>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<limits.h>
+	<ctype.h>
+	<float.h>
+	<locale.h>
+	"cJSON.h"
+
+1716778435 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\juego.c
+	"juego.h"
+	"archivos.h"
+	"../userHandler/jugador.h"
+	"../apiConfigs/curlReducido.h"
+
+1716778418 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\pregunta.c
+	"pregunta.h"
+	"juego.h"
+
+1716774904 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\teclado.c
+	"teclado.h"
+
+1716777440 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\userhandler\jugador.c
+	"jugador.h"
+
+1716771563 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\app\main.c
+	"../env/juego.h"
+
