@@ -1,4 +1,5 @@
 #include "jugador.h"
+#include "../env/pregunta.h"
 
 void cargarJugadores(tJuego* juego)
 {
@@ -13,8 +14,8 @@ void cargarJugadores(tJuego* juego)
     {
         numJugador++;
         (juego->cantJugadores)++;
-        memcpy(&juego->jugadores[numJugador - 1], &jugadorActual, sizeof(tJugador));
-        juego->jugadores[numJugador - 1].puntaje = 0;
+        jugadorActual.puntaje = 0;
+        ponerEnOrdenConDuplicados(&(juego->jugadores), &jugadorActual, sizeof(jugadorActual), compararIdJugadores, NULL);
         ingresarNombreJugador(numJugador + 1, &jugadorActual);
     }
 }
@@ -29,64 +30,92 @@ void ingresarNombreJugador(int numJugador, tJugador* jugadorActual)
     }
     while(strlen(jugadorActual->nombre) == 0);
 
-//    jugadorActual->turno = numJugador;
+    jugadorActual->id = rand() * (rand() & 1? -1 : 1);
 
     system("cls");
 }
 
-void mezclarJugadores(void* juego, int cantJugadores)
+int compararIdJugadores(const void *jugador1, const void *jugador2)
 {
-    int i;
-    int j;
+    tJugador *jug1,
+             *jug2;
 
-    for(i = cantJugadores - 1; i > 0; i--)
-    {
-        j = rand() % (i + 1);
-        if (i != j)
-            intercambiarJugadores(&((tJuego*)juego)->jugadores[i],
-                                  &((tJuego*)juego)->jugadores[j]);
-    }
+    if(!jugador1)
+        return -1;
+    if(!jugador2)
+        return 1;
+
+    jug1 = (tJugador *) jugador1;
+    jug2 = (tJugador *) jugador2;
+
+    return jug1->id - jug2->id;
 }
 
-void intercambiarJugadores(tJugador* jugadorA, tJugador* jugadorB)
+int calcularPuntajePorJugador(void* jugador, void *recurso)
 {
-    tJugador temp;
+    tJugador *jug;
+    tJuego *juego;
 
-    memcpy(&temp, jugadorA, sizeof(tJugador));
-    memcpy(jugadorA, jugadorB, sizeof(tJugador));
-    memcpy(jugadorB, &temp, sizeof(tJugador));
-}
+    if(!jugador || !recurso)
+        return -34;
 
-void calcularPuntajePorJugador(tJugador* jugador, int nroRonda, int menorTiempo,
-                               int correctasEnMenorTiempoPorRonda)
-{
+    jug = (tJugador *) jugador;
+    juego = (tJuego *) recurso;
+
 //    printf("Nro ronda: %d\n", nroRonda + 1);
 //    printf("Correctas menor tiempo: %d\n", correctasEnMenorTiempoPorRonda);
 //    printf("Menor tiempo: %d\n\n", menorTiempo);
-    if (jugador->respuestas[nroRonda].esCorrecta)
-    {
-        if (jugador->respuestas[nroRonda].tiempoDeRespuesta == menorTiempo)
-        {
-            if(correctasEnMenorTiempoPorRonda <= 1)
-            {
-                jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
-                jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
-            }
-            else
-            {
-                jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
-                jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
-            }
-        }
-        else
-        {
-            jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
-            jugador->puntaje += PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
-        }
-    }
-    else if(jugador->respuestas[nroRonda].opcion != '\0') /// si no es correcta, y además respondió algo erróneamente
-    {
-        jugador->respuestas[nroRonda].puntaje = PUNTOS_RESPUESTA_INCORRECTA;
-        jugador->puntaje += PUNTOS_RESPUESTA_INCORRECTA;
-    }
+
+    recorrerEnOrdenSimpleArbolBinBusq(&(juego->preguntas), jug, calificarJugadorPorRespuestas);
+
+    return TODO_OK_;
+}
+
+int compararPuntaje(const void *ganador, const void *jugador)
+{
+    tJugador *jug,
+             *gan;
+
+    if(!jugador)
+        return -1;
+    if(!ganador)
+        return 1;
+
+    jug = (tJugador *) jugador;
+    gan = (tJugador *) ganador;
+
+    return  gan->puntaje - jug->puntaje;
+}
+
+int mostrarPuntajesTotales(void *jugador, void *recurso)
+{
+    tJugador *jug;
+    tJuego *juego;
+
+    if(!jugador || !recurso)
+        return -34;
+
+    jug = (tJugador *)jugador;
+    juego = (tJuego *)recurso;
+
+    fprintf(juego->salidaActual, "\t%s:\t%3d %s\n", jug->nombre, jug->puntaje, jug->puntaje == 1 || jug->puntaje == -1?"punto":"puntos");
+
+    return TODO_OK;
+}
+
+int mostrarSiEsGanador(void *jugador, void *recurso)
+{
+    tJugador *jug;
+    tJuego *juego;
+
+    if(!jugador || !recurso)
+        return -34;
+
+    jug = (tJugador *)jugador;
+    juego = (tJuego *)recurso;
+
+    if(jug->puntaje == juego->puntajeMaximo)
+        fprintf(juego->salidaActual, "\t%s\n", jug->nombre);
+
+    return TODO_OK;
 }

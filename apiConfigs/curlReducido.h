@@ -22,7 +22,7 @@ typedef struct
 size_t WriteCallback(void* contents, size_t tamanyo, size_t nmemb, void *userp);
 int cargarCURL(CURL** curl);
 int verificarConectividad(CURL** curl);
-int obtenerPreguntas(CURL** cURL, tPregunta* preguntas, int dificultad, int cantRounds);
+int obtenerPreguntas(CURL** cURL, tJuego* juego, int dificultad, int cantRounds);
 void liberarCurl(CURL** curl);
 
 #endif

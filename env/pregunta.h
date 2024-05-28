@@ -1,5 +1,5 @@
-#ifndef PREGUNTA_H_INCLUDED
-#define PREGUNTA_H_INCLUDED
+#ifndef PREGUNTA
+#define PREGUNTA
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -8,7 +8,7 @@
 #include "cJSON.h"
 #include "estructuras.h"
 
-void parsearPregunta(char* jsonString, void* preguntas);
+void parsearPregunta(char* jsonString, tJuego* juego);
 void imprimirPregunta(FILE* salida, const void* pregunta);
 
 void mezclarPreguntas(void* preguntas, int cantPreguntas);
@@ -19,9 +19,11 @@ void cargarYMezclarOpciones(char opciones[][TAM_OPCION],
 void mezclarOpciones(tOpcion* opciones, int cantOpciones);
 void intercambiarOpciones(tOpcion* opcionA, tOpcion* opcionB);
 
-void realizarPregunta(tJuego* juego, int jugador, int rondaActual);
-void procesarRespuesta(tJuego* juego, int jugador, int rondaActual,
-                       char opciones[][TAM_OPCION], char respuesta,
-                       int menorTiempo, int tiempoDeRespuesta);
+void realizarPregunta(void *pregunta, unsigned tamInfo, void *recurso);
+void procesarRespuesta(tJuego* juego, tPregunta *pregunta, tRespuesta respuesta);
+void calificarJugadorPorRespuestas(void *pregunta, unsigned tamInfo, void *recurso);
+int compararIdPregunta(const void *pregunta1, const void *pregunta2);
+void mostrarOpcionesPreguntaConRespuestas(void *pregunta, unsigned tamInfo, void *recurso);
+void mostrarRespuestasPorPregunta(tPregunta *pregunta, tJuego *juego);
 
-#endif // PREGUNTA_H_INCLUDED
+#endif

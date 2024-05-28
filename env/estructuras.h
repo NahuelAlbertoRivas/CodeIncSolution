@@ -2,6 +2,9 @@
 #define ESTRUCTURAS
 
 #include <windows.h>
+#include "../packages/arbolBinBusq/arbol.h"
+#include "../packages/lista/lista.h"
+#include "../packages/colaDinamica/cola.h"
 
 enum eDificultad
 {
@@ -31,10 +34,13 @@ typedef struct
 
 typedef struct
 {
-    char id[TAM_ID],
+    char id,
          pregunta[TAM_PREGUNTA];
+    byte menorTiempoRespuesta,
+         cantMenorTiempoRespuesta;
     tOpcion opciones[CANT_OPCIONES];
     enum eDificultad nivel;
+    tCola respuestas;
 } tPregunta;
 
 typedef struct
@@ -52,9 +58,8 @@ typedef struct
 typedef struct
 {
     char nombre[NOMBRE_MAX],
-         turno;
+         id;
     short int puntaje;
-    tRespuesta respuestas[MAX_PREGUNTAS]; // utilizar lista o cola
 } tJugador;
 
 #define MIN_TIEMPO_RONDA 1
@@ -65,14 +70,22 @@ typedef struct
 
 typedef struct
 {
-    int cantRondas;
-    int tiempoRonda;
-    int cantJugadores;
-    int menorTiempoRespuesta[MAX_PREGUNTAS];
+    int cantRondas,
+         tiempoRonda,
+         cantJugadores;
+    byte rondaActual;
+    short int puntajeMaximo;
     enum eDificultad dificultad;
-    tPregunta preguntas[MAX_PREGUNTAS]; //Cambiar a tArbol si considero priorizar memoria antes que complejidad computacional (performance).
-    tJugador jugadores[MAX_JUGADORES]; //Cambiar a tArbol si considero priorizar memoria antes que complejidad computacional (performance).
+    tArbolBinBusq preguntas; //Cambiar a tArbol si considero priorizar memoria antes que complejidad computacional (performance).
+    tLista jugadores; //Cambiar a tArbol si considero priorizar memoria antes que complejidad computacional (performance).
+    FILE *salidaActual;
 } tJuego;
+
+typedef struct
+{
+    tPregunta *preg;
+    tJuego *juego;
+} tAuxResumenFinal;
 
 // PUNTAJES
 #define PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA 3

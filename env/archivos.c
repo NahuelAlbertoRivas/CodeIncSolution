@@ -35,15 +35,21 @@ char leerArchivoConfig(tJuego* juego)
     return OK;
 }
 
-char imprimirResultados(const tJuego* juego)
+char imprimirResultados(tJuego* juego)
 {
     FILE* archInforme;
-    char estado;
+    char estado,
+         nombreArch[TAM_NOMBRE_INFORME];
     time_t tiempoTranscurrido;
     struct tm* fechaHora;
-    char nombreArch[TAM_NOMBRE_INFORME];
+    tJugador puntajeMaximo;
+    byte cantGanadores;
 
-    generarImpresion(stdout, juego);
+    cantGanadores = buscarMayorElemNoClaveLista(&(juego->jugadores), &puntajeMaximo, sizeof(tJugador), compararPuntaje);
+    juego->puntajeMaximo = puntajeMaximo.puntaje;
+
+    juego->salidaActual = stdout;
+    generarImpresion(juego, puntajeMaximo, cantGanadores);
 
     tiempoTranscurrido = time(NULL);
     fechaHora = localtime(&tiempoTranscurrido);
@@ -59,72 +65,53 @@ char imprimirResultados(const tJuego* juego)
     if((estado = abrirArchivo(&archInforme, nombreArch, "wt") != OK))
         return estado;
 
-    generarImpresion(archInforme, juego);
+    juego->salidaActual = archInforme;
+    generarImpresion(juego, puntajeMaximo, cantGanadores);
 
     fclose(archInforme);
 
     return OK;
 }
 
-void generarImpresion(FILE* salida, const tJuego* juego)
+void generarImpresion(tJuego* juego, tJugador ganadorReferencia, byte cantGanadores)
 {
-    int ronda;
-    int jugador;
-    int puntajeMaximo;
-
-    calcularPuntajeMaximo(juego->jugadores, &puntajeMaximo, juego->cantJugadores);
-
-    for (ronda = 0; ronda < juego->cantRondas; ronda++)
-    {
-        fprintf(salida, "%d- %s\n\tA) %s %s\n\tB) %s %s\n\tC) %s %s\n\tD) %s %s\n\n[Respuestas]:\n",
-                ronda + 1, juego->preguntas[ronda].pregunta,
-                juego->preguntas[ronda].opciones[0].valor,
-                juego->preguntas[ronda].opciones[0].valida? "(Correcta)" : "",
-                juego->preguntas[ronda].opciones[1].valor,
-                juego->preguntas[ronda].opciones[1].valida? "(Correcta)" : "",
-                juego->preguntas[ronda].opciones[2].valor,
-                juego->preguntas[ronda].opciones[2].valida? "(Correcta)" : "",
-                juego->preguntas[ronda].opciones[3].valor,
-                juego->preguntas[ronda].opciones[3].valida? "(Correcta)" : "");
-
-        for (jugador = 0; jugador < juego->cantJugadores; jugador++)
-        {
-            if(juego->jugadores[jugador].respuestas[ronda].opcion != 0)
-            {
-                fprintf(salida, "%s: %d %s en contestar\t %c (%s%d)\n",
-                        juego->jugadores[jugador].nombre,
-                        juego->jugadores[jugador].respuestas[ronda].tiempoDeRespuesta,
-                        juego->jugadores[jugador].respuestas[ronda].tiempoDeRespuesta == 1?"segundo":"segundos",
-                        juego->jugadores[jugador].respuestas[ronda].opcion,
-                        juego->jugadores[jugador].respuestas[ronda].puntaje > 0 ? "+" : "",
-                        juego->jugadores[jugador].respuestas[ronda].puntaje);
-            }
-            else
-                fprintf(salida, "%s: No contesta\t0 puntos\n", juego->jugadores[jugador].nombre);
-        }
-        fprintf(salida, "\n\n");
-    }
-
-    fprintf(salida, "Total\n");
-    for (jugador = 0; jugador < juego->cantJugadores; jugador++)
-        fprintf(salida, "\t%s:\t%3d %s\n",
-                juego->jugadores[jugador].nombre,
-                juego->jugadores[jugador].puntaje,
-                juego->jugadores[jugador].puntaje == 1 || juego->jugadores[jugador].puntaje == -1?"punto":"puntos");
-
-    fprintf(salida, "\nGanador/es:\n");
-    for (jugador = 0; jugador < juego->cantJugadores; jugador++)
-        if (juego->jugadores[jugador].puntaje == puntajeMaximo)
-            fprintf(salida, "\t%s\n", juego->jugadores[jugador].nombre);
+    juego->rondaActual = 1;
+    recorrerEnOrdenSimpleArbolBinBusq(&(juego->preguntas), juego, mostrarOpcionesPreguntaConRespuestas);
+    fprintf(juego->salidaActual, "Total\n");
+    mapLista(&(juego->jugadores), mostrarPuntajesTotales, juego);
+    fprintf(juego->salidaActual, "\n¡¡Felicitaciones %s!!:\n", cantGanadores == 1? "ganador/a" : "ganadoras/es");
+    mapLista(&(juego->jugadores), mostrarSiEsGanador, juego);
 }
 
-void calcularPuntajeMaximo(const tJugador* jugadores, int* puntajeMaximo, int cantJugadores)
+/// (recordemos que la cola tiene las respuestas respectivamente a como están los jugadores en la lista)
+
+/// fn para mapear lista de jugadores
+int mostrarJugadorRespuesta(void *jugador, void *recurso)
 {
-    int jugador;
+    tJugador *jug;
+    tRespuesta rta;
+    tAuxResumenFinal *recursoResumen;
 
-    *puntajeMaximo = jugadores[0].puntaje;
+    if(!jugador || !recurso)
+        return -32;
 
-    for (jugador = 1; jugador < cantJugadores; jugador++)
-        if (jugadores[jugador].puntaje > *puntajeMaximo)
-            *puntajeMaximo = jugadores[jugador].puntaje;
+    recursoResumen = (tAuxResumenFinal *) recurso;
+    jug = (tJugador *)jugador;
+
+    if(sacarDeCola(&(recursoResumen->preg->respuestas), &rta, sizeof(tRespuesta)) == TODO_OK_)
+    {
+        if(rta.opcion) /// significa que el jugador respondió algo -bien o mal-
+            fprintf(recursoResumen->juego->salidaActual, "%s: %d %s en contestar\t %c (%s%d)\n", jug->nombre,
+                                                                                 rta.tiempoDeRespuesta,
+                                                                                 rta.tiempoDeRespuesta == 1?"segundo":"segundos",
+                                                                                 rta.opcion,
+                                                                                 rta.puntaje > 0 ? "+" : "",
+                                                                                 rta.puntaje);
+        else /// el jugador no respondió nada
+            fprintf(recursoResumen->juego->salidaActual, "%s: No contesta\t0 puntos\n", jug->nombre);
+    }
+
+    ponerEnCola(&(recursoResumen->preg->respuestas), &rta, sizeof(tRespuesta));
+
+    return TODO_OK;
 }

@@ -14,9 +14,10 @@
 char abrirArchivo(FILE** archivoAAbrir, const char* nombreArchivo,
                  const char* modoApertura);
 char leerArchivoConfig(tJuego* juego);
-char imprimirResultados(const tJuego* juego);
-void generarImpresion(FILE* salida, const tJuego* juego);
+char imprimirResultados(tJuego* juego);
+void generarImpresion(tJuego* juego, tJugador, byte cantGanadores);
 void calcularPuntajeMaximo(const tJugador* jugadores, int* puntajeMaximo,
                            int cantJugadores);
+void obtenerMaximoPuntaje(void *jugador, void *maximo);
 
 #endif

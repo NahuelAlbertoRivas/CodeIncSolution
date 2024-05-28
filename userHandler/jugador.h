@@ -9,9 +9,10 @@
 
 void cargarJugadores(tJuego* juego);
 void ingresarNombreJugador(int numJugador, tJugador* jugadorActual);
-void mezclarJugadores(void* juego, int cantJugadores);
-void intercambiarJugadores(tJugador* jugadorA, tJugador* jugadorB);
-void calcularPuntajePorJugador(tJugador* jugador, int nroRonda, int menorTiempo,
-                               int correctasEnMenorTiempoPorRonda);
+int compararIdJugadores(const void *jugador1, const void *jugador2);
+int calcularPuntajePorJugador(void* jugador, void *recurso);
+int compararPuntaje(const void *jugador, const void *ganador);
+int mostrarPuntajesTotales(void *jugador, void *recurso);
+int mostrarSiEsGanador(void *jugador, void *recurso);
 
 #endif

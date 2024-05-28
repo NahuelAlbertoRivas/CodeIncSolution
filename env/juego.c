@@ -28,24 +28,32 @@ char mostrarMenu()
 char iniciarJuego()
 {
     tJuego juego;
-    char opcion;
-    int estado;
+    char opcion,
+         estado;
 
     opcion = mostrarMenu();
 
     switch(opcion)
     {
     case 'A':
+        crearArbolBinBusq(&(juego.preguntas));
+        crearLista(&(juego.jugadores));
         if((estado = configurarJuego(&juego)) != OK)
             return estado;
         mostrarOrdenJuego(&juego);
-        printf("\n[Detalles]\nCantidad de rondas: %d\nTiempo por ronda: %d\n\n¡Éxitos a todos!\n\n",
+        printf("\n[Detalles]\nCantidad de rondas: %d\nTiempo por ronda: %d\nTendrán un lapso de 7 segundos para prepararse antes de iniciar\n\n¡Éxitos a todos!\n\nPor favor, ingresen cualquier tecla para continuar",
                           juego.cantRondas,     juego.tiempoRonda);
+        getch();
+        system("cls");
+        fflush(stdin);
+        recorrerEnOrdenSimpleArbolBinBusq(&(juego.preguntas), &juego, crearColaRespuestas);
         iniciarTrivia(&juego);
-        determinarPuntos(&juego);
-        if((estado = imprimirResultados(&juego)) != OK)
-            return estado;
-        break;
+        mapLista(&(juego.jugadores), calcularPuntajePorJugador, &juego);
+        estado = imprimirResultados(&juego);
+        vaciarLista(&(juego.jugadores));
+        recorrerEnOrdenSimpleArbolBinBusq(&(juego.preguntas), &juego, liberarColaRespuestas);
+        eliminarArbol(&(juego.preguntas));
+        return estado;
     case 'B':
         printf("¡Hasta luego!\n");
         break;
@@ -66,7 +74,6 @@ int configurarJuego(tJuego* juego)
     if(juego->cantJugadores == 0)
         return SIN_JUGADORES;
 
-    mezclar(juego, juego->cantJugadores, mezclarJugadores);
     elegirDificultad(juego);
 
     if ((estado = cargarCURL(&cURL)) != OK)
@@ -78,7 +85,7 @@ int configurarJuego(tJuego* juego)
     //    }
 
     if(cURL)
-        estado = obtenerPreguntas(&cURL, juego->preguntas, juego->dificultad, juego->cantRondas);
+        estado = obtenerPreguntas(&cURL, juego, juego->dificultad, juego->cantRondas);
 
     liberarCurl(&cURL);
 
@@ -117,90 +124,108 @@ void mezclar(void* item, int cantElementos, void(*mezclarImpl)(void*, int))
     mezclarImpl(item, cantElementos);
 }
 
-void mostrarOrdenJuego(const tJuego* juego)
+void mostrarOrdenJuego(tJuego* juego)
 {
-    int i;
+    byte i = 1;
 
     puts("¡Fue sorteado el orden en que jugarán! La disposición es la siguiente\n");
-    for (i = 0; i < juego->cantJugadores; i++)
-        printf("Turno %d: %s\n", i + 1, juego->jugadores[i].nombre);
+    mapLista(&(juego->jugadores), mostrarOrdenJugador, &i);
+}
+
+int mostrarOrdenJugador(void *jugador, void *recurso)
+{
+    tJugador *jug;
+    byte *nro;
+
+    if(!jugador || !recurso)
+        return ERROR_PARAMETROS;
+
+    jug = (tJugador *) jugador;
+    nro = (byte *) recurso;
+
+    printf("Turno %d: %s\n", *nro, jug->nombre);
+
+    (*nro)++;
+
+    return TODO_OK;
 }
 
 void iniciarTrivia(tJuego* juego)
 {
-    int jugador;
+    recorrerEnOrdenSimpleArbolBinBusq(&(juego->preguntas), juego, inicializarMenorTiempoPreguntas);
 
-    inicializarMenorTiempoRondas(juego);
+    mapLista(&(juego->jugadores), mostrarPreguntasAlJugador, juego);
 
-    for(jugador = 0; jugador < juego->cantJugadores; jugador++)
-    {
-        printf("%s, ¿estás lista/o para arrancar el juego?\nPor favor, ingresá cualquier tecla para ver la primer pregunta...\n",
-                juego->jugadores[jugador].nombre);
-        getch();
-        fflush(stdin);
-        system("cls");
-        printf("Turno de %s", juego->jugadores[jugador].nombre);
-
-        realizarRondas(juego, jugador);
-
-        printf("\n\nFin de tu turno %s, ingresá cualquier tecla para continuar", juego->jugadores[jugador].nombre);
-        getch();
-        system("cls");
-    }
     puts("¡Juego terminado! Ingresen cualquier tecla para ver los resultados");
     getch();
     system("cls");
 }
 
-void realizarRondas(tJuego* juego, int jugador)
+int mostrarPreguntasAlJugador(void *jugador, void *recurso)
 {
-    int rondaActual;
+    tJugador *jug;
+    tJuego *juego;
 
-    for(rondaActual = 0; rondaActual < juego->cantRondas; rondaActual++)
-    {
-        printf("\n\nPregunta %d: %s\n", rondaActual + 1,
-               juego->preguntas[rondaActual].pregunta);
-        realizarPregunta(juego, jugador, rondaActual);
-    }
+    if(!jugador || !recurso)
+        return -32;
+
+    juego = (tJuego *) recurso;
+    jug = (tJugador *)jugador;
+
+    juego->rondaActual = 1;
+
+    system("cls");
+    printf("Preparate %s, en 7 segundos comienza tu turno\n",
+                jug->nombre);
+    fflush(stdin); /// por si anteriormente ingresaron enter, ya que esta última tecla tiene doble acción sobre el buffer
+    sleep(7);
+    system("cls");
+    printf("[Tu turno %s]", jug->nombre);
+
+    recorrerEnOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
+
+    printf("\n\nFin de tu turno %s, ingresá cualquier tecla para continuar", jug->nombre);
+    getch();
+    fflush(stdin);
+    system("cls");
+
+    return TODO_OK;
 }
 
-void determinarPuntos(tJuego* juego)
+void inicializarMenorTiempoPreguntas(void *pregunta, unsigned tamInfo, void *recurso)
 {
-    int ronda;
-    int jugador;
-    int correctasEnMenorTiempoPorRonda;
+    tPregunta *preg;
+    tJuego *juego;
 
-    for (ronda = 0; ronda < juego->cantRondas; ronda++)
-    {
-        correctasEnMenorTiempoPorRonda = obtenerCorrectasEnMenorTiempo(juego->jugadores, juego->cantJugadores, ronda, juego->menorTiempoRespuesta[ronda]);
-        for (jugador = 0; jugador < juego->cantJugadores; jugador++)
-        {
-            calcularPuntajePorJugador(&juego->jugadores[jugador], ronda,
-                                      juego->menorTiempoRespuesta[ronda],
-                                      correctasEnMenorTiempoPorRonda);
-        }
-    }
+    if(!pregunta || !recurso)
+        return;
+
+    preg = (tPregunta *) pregunta;
+    juego = (tJuego *)recurso;
+
+    preg->menorTiempoRespuesta = (byte) juego->tiempoRonda;
 }
 
-int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores,
-                                  int nroRonda, int menorTiempo)
+void crearColaRespuestas(void *pregunta, unsigned tamInfo, void *recurso)
 {
-    int jugador;
-    int correctasEnMenorTiempo;
+    tPregunta *preg;
 
-    correctasEnMenorTiempo = 0;
+    if(!pregunta)
+        return;
 
-    for (jugador = 0; jugador < cantJugadores; jugador++)
-        if(jugadores[jugador].respuestas[nroRonda].esCorrecta &&
-                jugadores[jugador].respuestas[nroRonda].tiempoDeRespuesta ==  menorTiempo)
-            correctasEnMenorTiempo++;
+    preg = (tPregunta *) pregunta;
 
-    return correctasEnMenorTiempo;
+    crearCola(&(preg->respuestas));
 }
 
-void inicializarMenorTiempoRondas(tJuego *juego)
+void liberarColaRespuestas(void *pregunta, unsigned tamInfo, void *recurso)
 {
-    byte i;
-    for(i = 0; i < juego->cantRondas; i++)
-        juego->menorTiempoRespuesta[i] = juego->tiempoRonda;
+    tPregunta *preg;
+
+    if(!pregunta)
+        return;
+
+    preg = (tPregunta *) pregunta;
+
+    vaciarCola(&(preg->respuestas));
 }

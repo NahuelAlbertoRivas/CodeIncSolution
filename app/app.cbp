@@ -56,6 +56,18 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="../env/teclado.h" />
+		<Unit filename="../packages/arbolBinBusq/arbol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../packages/arbolBinBusq/arbol.h" />
+		<Unit filename="../packages/colaDinamica/cola.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../packages/colaDinamica/cola.h" />
+		<Unit filename="../packages/lista/lista.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../packages/lista/lista.h" />
 		<Unit filename="../userHandler/jugador.c">
 			<Option compilerVar="CC" />
 		</Unit>

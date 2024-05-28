@@ -49,7 +49,7 @@ int verificarConectividad(CURL** cURL)
     return OK;
 }
 
-int obtenerPreguntas(CURL** cURL, tPregunta* preguntas, int dificultad, int cantRounds)
+int obtenerPreguntas(CURL** cURL, tJuego* juego, int dificultad, int cantRounds)
 {
     CURLcode res;
     tUserDataWriteCallback userData;
@@ -73,8 +73,8 @@ int obtenerPreguntas(CURL** cURL, tPregunta* preguntas, int dificultad, int cant
         return ERROR_SOLICITUD;
     }
 
-    parsearPregunta(userData.json, preguntas);
-    mezclar(preguntas, cantRounds, mezclarPreguntas);
+    parsearPregunta(userData.json, juego);
+    /// mezclar(preguntas, cantRounds, mezclarPreguntas);
 
     return OK;
 }
