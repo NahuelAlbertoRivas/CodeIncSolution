@@ -10,19 +10,6 @@ void crearCola(tCola *p)
     p->ult = NULL;
 }
 
-int colaLlena(const tCola *p, unsigned cantBytes)
-{
-    tNodoCola *nue;
-
-    if(RESERVAR_MEMORIA_NODO(nue, sizeof(tNodoCola), nue->info, cantBytes) == TODO_OK_)
-    {
-        free(nue->info);
-        free(nue);
-    }
-
-    return !nue || !(nue->info);
-}
-
 int ponerEnCola(tCola *p, const void *d, unsigned cantBytes)
 {
     tNodoCola *nue;
@@ -41,21 +28,10 @@ int ponerEnCola(tCola *p, const void *d, unsigned cantBytes)
     return TODO_OK_;
 }
 
-
-int verPrimeroCola(const tCola *p, void *d, unsigned cantBytes)
-{
-    if(p->pri == NULL)
-        return COLA_VACIA;
-    memcpy(d, p->pri->info, MINIMO(cantBytes, p->pri->tamInfo));
-    return TODO_OK_;
-}
-
-
 int colaVacia(const tCola *p)
 {
     return p->pri == NULL;
 }
-
 
 int sacarDeCola(tCola *p, void *d, unsigned cantBytes)
 {
@@ -70,7 +46,6 @@ int sacarDeCola(tCola *p, void *d, unsigned cantBytes)
         p->ult = NULL;
     return TODO_OK_;
 }
-
 
 void vaciarCola(tCola *p)
 {

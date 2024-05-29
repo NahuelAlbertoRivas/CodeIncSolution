@@ -48,7 +48,7 @@ char iniciarJuego()
         fflush(stdin);
         recorrerEnOrdenSimpleArbolBinBusq(&(juego.preguntas), &juego, crearColaRespuestas);
         iniciarTrivia(&juego);
-        mapLista(&(juego.jugadores), calcularPuntajePorJugador, &juego);
+        /// mapLista(&(juego.jugadores), calcularPuntajePorJugador, &juego);
         estado = imprimirResultados(&juego);
         vaciarLista(&(juego.jugadores));
         recorrerEnOrdenSimpleArbolBinBusq(&(juego.preguntas), &juego, liberarColaRespuestas);
@@ -132,24 +132,6 @@ void mostrarOrdenJuego(tJuego* juego)
     mapLista(&(juego->jugadores), mostrarOrdenJugador, &i);
 }
 
-int mostrarOrdenJugador(void *jugador, void *recurso)
-{
-    tJugador *jug;
-    byte *nro;
-
-    if(!jugador || !recurso)
-        return ERROR_PARAMETROS;
-
-    jug = (tJugador *) jugador;
-    nro = (byte *) recurso;
-
-    printf("Turno %d: %s\n", *nro, jug->nombre);
-
-    (*nro)++;
-
-    return TODO_OK;
-}
-
 void iniciarTrivia(tJuego* juego)
 {
     recorrerEnOrdenSimpleArbolBinBusq(&(juego->preguntas), juego, inicializarMenorTiempoPreguntas);
@@ -190,42 +172,4 @@ int mostrarPreguntasAlJugador(void *jugador, void *recurso)
     system("cls");
 
     return TODO_OK;
-}
-
-void inicializarMenorTiempoPreguntas(void *pregunta, unsigned tamInfo, void *recurso)
-{
-    tPregunta *preg;
-    tJuego *juego;
-
-    if(!pregunta || !recurso)
-        return;
-
-    preg = (tPregunta *) pregunta;
-    juego = (tJuego *)recurso;
-
-    preg->menorTiempoRespuesta = (byte) juego->tiempoRonda;
-}
-
-void crearColaRespuestas(void *pregunta, unsigned tamInfo, void *recurso)
-{
-    tPregunta *preg;
-
-    if(!pregunta)
-        return;
-
-    preg = (tPregunta *) pregunta;
-
-    crearCola(&(preg->respuestas));
-}
-
-void liberarColaRespuestas(void *pregunta, unsigned tamInfo, void *recurso)
-{
-    tPregunta *preg;
-
-    if(!pregunta)
-        return;
-
-    preg = (tPregunta *) pregunta;
-
-    vaciarCola(&(preg->respuestas));
 }

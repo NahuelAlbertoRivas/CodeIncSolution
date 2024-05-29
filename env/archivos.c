@@ -42,14 +42,6 @@ char imprimirResultados(tJuego* juego)
          nombreArch[TAM_NOMBRE_INFORME];
     time_t tiempoTranscurrido;
     struct tm* fechaHora;
-    tJugador puntajeMaximo;
-    byte cantGanadores;
-
-    cantGanadores = buscarMayorElemNoClaveLista(&(juego->jugadores), &puntajeMaximo, sizeof(tJugador), compararPuntaje);
-    juego->puntajeMaximo = puntajeMaximo.puntaje;
-
-    juego->salidaActual = stdout;
-    generarImpresion(juego, puntajeMaximo, cantGanadores);
 
     tiempoTranscurrido = time(NULL);
     fechaHora = localtime(&tiempoTranscurrido);
@@ -66,25 +58,31 @@ char imprimirResultados(tJuego* juego)
         return estado;
 
     juego->salidaActual = archInforme;
-    generarImpresion(juego, puntajeMaximo, cantGanadores);
+    generarImpresion(juego);
 
     fclose(archInforme);
+
+    mostrarResultadosPorConsola(nombreArch);
 
     return OK;
 }
 
-void generarImpresion(tJuego* juego, tJugador ganadorReferencia, byte cantGanadores)
+void generarImpresion(tJuego* juego)
 {
+    tJugador puntajeMaximo;
+    byte cantGanadores;
+
     juego->rondaActual = 1;
     recorrerEnOrdenSimpleArbolBinBusq(&(juego->preguntas), juego, mostrarOpcionesPreguntaConRespuestas);
     fprintf(juego->salidaActual, "Total\n");
     mapLista(&(juego->jugadores), mostrarPuntajesTotales, juego);
+    cantGanadores = buscarMayorElemNoClaveLista(&(juego->jugadores), &puntajeMaximo, sizeof(tJugador), compararPuntaje);
+    juego->puntajeMaximo = puntajeMaximo.puntaje;
     fprintf(juego->salidaActual, "\n¡¡Felicitaciones %s!!:\n", cantGanadores == 1? "ganador/a" : "ganadoras/es");
     mapLista(&(juego->jugadores), mostrarSiEsGanador, juego);
 }
 
 /// (recordemos que la cola tiene las respuestas respectivamente a como están los jugadores en la lista)
-
 /// fn para mapear lista de jugadores
 int mostrarJugadorRespuesta(void *jugador, void *recurso)
 {
@@ -100,6 +98,7 @@ int mostrarJugadorRespuesta(void *jugador, void *recurso)
 
     if(sacarDeCola(&(recursoResumen->preg->respuestas), &rta, sizeof(tRespuesta)) == TODO_OK_)
     {
+        calificarJugadorPorRespuestas(jug, recursoResumen->preg, &rta);
         if(rta.opcion) /// significa que el jugador respondió algo -bien o mal-
             fprintf(recursoResumen->juego->salidaActual, "%s: %d %s en contestar\t %c (%s%d)\n", jug->nombre,
                                                                                  rta.tiempoDeRespuesta,
@@ -111,7 +110,22 @@ int mostrarJugadorRespuesta(void *jugador, void *recurso)
             fprintf(recursoResumen->juego->salidaActual, "%s: No contesta\t0 puntos\n", jug->nombre);
     }
 
-    ponerEnCola(&(recursoResumen->preg->respuestas), &rta, sizeof(tRespuesta));
-
     return TODO_OK;
+}
+
+void mostrarResultadosPorConsola(char *nombreArch)
+{
+    FILE *pf = fopen(nombreArch, "rt");
+    char linea[TAM_MAX_LECTURA];
+
+    if(!pf)
+    {
+        printf("\nInforme no disponible.\n");
+        return;
+    }
+
+    while(fgets(linea, TAM_MAX_LECTURA, pf))
+        fprintf(stdout, "%s", linea);
+
+    fclose(pf);
 }

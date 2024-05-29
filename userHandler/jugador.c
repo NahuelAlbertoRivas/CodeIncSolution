@@ -51,24 +51,22 @@ int compararIdJugadores(const void *jugador1, const void *jugador2)
     return jug1->id - jug2->id;
 }
 
-int calcularPuntajePorJugador(void* jugador, void *recurso)
+int mostrarOrdenJugador(void *jugador, void *recurso)
 {
     tJugador *jug;
-    tJuego *juego;
+    byte *nro;
 
     if(!jugador || !recurso)
-        return -34;
+        return ERROR_PARAMETROS;
 
     jug = (tJugador *) jugador;
-    juego = (tJuego *) recurso;
+    nro = (byte *) recurso;
 
-//    printf("Nro ronda: %d\n", nroRonda + 1);
-//    printf("Correctas menor tiempo: %d\n", correctasEnMenorTiempoPorRonda);
-//    printf("Menor tiempo: %d\n\n", menorTiempo);
+    printf("Turno %d: %s\n", *nro, jug->nombre);
 
-    recorrerEnOrdenSimpleArbolBinBusq(&(juego->preguntas), jug, calificarJugadorPorRespuestas);
+    (*nro)++;
 
-    return TODO_OK_;
+    return TODO_OK;
 }
 
 int compararPuntaje(const void *ganador, const void *jugador)
@@ -93,7 +91,7 @@ int mostrarPuntajesTotales(void *jugador, void *recurso)
     tJuego *juego;
 
     if(!jugador || !recurso)
-        return -34;
+        return ERROR_PARAMETROS;
 
     jug = (tJugador *)jugador;
     juego = (tJuego *)recurso;
@@ -109,7 +107,7 @@ int mostrarSiEsGanador(void *jugador, void *recurso)
     tJuego *juego;
 
     if(!jugador || !recurso)
-        return -34;
+        return ERROR_PARAMETROS;
 
     jug = (tJugador *)jugador;
     juego = (tJuego *)recurso;

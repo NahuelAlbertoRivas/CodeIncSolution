@@ -11,19 +11,18 @@
 void parsearPregunta(char* jsonString, tJuego* juego);
 void imprimirPregunta(FILE* salida, const void* pregunta);
 
-void mezclarPreguntas(void* preguntas, int cantPreguntas);
-void intercambiarPreguntas(tPregunta* preguntaA, tPregunta* preguntaB);
-
-void cargarYMezclarOpciones(char opciones[][TAM_OPCION],
-                            const tPregunta* pregunta);
 void mezclarOpciones(tOpcion* opciones, int cantOpciones);
 void intercambiarOpciones(tOpcion* opcionA, tOpcion* opcionB);
 
 void realizarPregunta(void *pregunta, unsigned tamInfo, void *recurso);
 void procesarRespuesta(tJuego* juego, tPregunta *pregunta, tRespuesta respuesta);
-void calificarJugadorPorRespuestas(void *pregunta, unsigned tamInfo, void *recurso);
+void calificarJugadorPorRespuestas(tJugador *jug, tPregunta *preg, tRespuesta *rta);
 int compararIdPregunta(const void *pregunta1, const void *pregunta2);
 void mostrarOpcionesPreguntaConRespuestas(void *pregunta, unsigned tamInfo, void *recurso);
 void mostrarRespuestasPorPregunta(tPregunta *pregunta, tJuego *juego);
+
+void crearColaRespuestas(void *pregunta, unsigned tamInfo, void *recurso);
+void inicializarMenorTiempoPreguntas(void *pregunta, unsigned tamInfo, void *recurso);
+void liberarColaRespuestas(void *pregunta, unsigned tamInfo, void *recurso);
 
 #endif

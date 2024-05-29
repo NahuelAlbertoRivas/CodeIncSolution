@@ -1,0 +1,55 @@
+1- ¿Cuál es el monumento más famoso de la ciudad de Buenos Aires?
+	A) Teatro Colón 
+	B) Casa Rosada 
+	C) Recoleta 
+	D) Obelisco (Correcta)
+
+[Respuestas]:
+jug1: 2 segundos en contestar	 D (+1)
+jug3: 1 segundo en contestar	 D (+3)
+jug2: 4 segundos en contestar	 D (+1)
+
+
+2- ¿Quién fue el primer presidente de Argentina?
+	A) Bernardino Rivadavia (Correcta)
+	B) Bartolomé Mitre 
+	C) Mariano Moreno 
+	D) Javier Milei 
+
+[Respuestas]:
+jug1: 3 segundos en contestar	 A (+1)
+jug3: 1 segundo en contestar	 A (+3)
+jug2: 5 segundos en contestar	 A (+1)
+
+
+3- ¿Cuál es el río más importante de Argentina?
+	A) Río de la Plata 
+	B) Río Paraguay 
+	C) Río Uruguay 
+	D) Río Paraná (Correcta)
+
+[Respuestas]:
+jug1: 4 segundos en contestar	 D (+1)
+jug3: 3 segundos en contestar	 D (+3)
+jug2: 8 segundos en contestar	 D (+1)
+
+
+4- ¿Cuál es la capital de Argentina?
+	A) Mendoza 
+	B) Buenos Aires (Correcta)
+	C) Rosario 
+	D) Córdoba 
+
+[Respuestas]:
+jug1: 3 segundos en contestar	 B (+1)
+jug3: 1 segundo en contestar	 C (-2)
+jug2: 2 segundos en contestar	 B (+3)
+
+
+Total
+	jug1:	  4 puntos
+	jug3:	  7 puntos
+	jug2:	  6 puntos
+
+¡¡Felicitaciones ganador/a!!:
+	jug3

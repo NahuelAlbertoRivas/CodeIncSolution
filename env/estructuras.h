@@ -6,6 +6,8 @@
 #include "../packages/lista/lista.h"
 #include "../packages/colaDinamica/cola.h"
 
+#define ERROR_PARAMETROS -2
+
 enum eDificultad
 {
     FACIL = 1,

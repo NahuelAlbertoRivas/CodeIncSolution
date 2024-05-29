@@ -170,47 +170,73 @@ int compararIdPregunta(const void *pregunta1, const void *pregunta2)
     return preg1->id - preg2->id;
 }
 
-void calificarJugadorPorRespuestas(void *pregunta, unsigned tamInfo, void *recurso)
+void calificarJugadorPorRespuestas(tJugador *jug, tPregunta *preg, tRespuesta *rta)
 {
-    tPregunta *preg;
-    tJugador *jug;
-    tRespuesta rta;
-
-    if(!pregunta || !recurso)
+    if(!jug || !preg)
         return;
 
-    preg = (tPregunta *) pregunta;
-    jug = (tJugador *) recurso;
-
-    if(sacarDeCola(&(preg->respuestas), &rta, sizeof(tRespuesta)) != TODO_OK_)
-        return;
-
-    if (rta.esCorrecta)
+    if (rta->esCorrecta)
     {
-        if (rta.tiempoDeRespuesta == preg->menorTiempoRespuesta)
+        if (rta->tiempoDeRespuesta == preg->menorTiempoRespuesta)
         {
             if(preg->cantMenorTiempoRespuesta <= 1)
             {
-                rta.puntaje = PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
+                rta->puntaje = PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
                 jug->puntaje += PUNTOS_RESPUESTA_CORRECTA_UNICA_MAS_RAPIDA;
             }
             else
             {
-                rta.puntaje = PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
+                rta->puntaje = PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
                 jug->puntaje += PUNTOS_RESPUESTA_CORRECTA_NO_UNICA_MAS_RAPIDA;
             }
         }
         else
         {
-            rta.puntaje = PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
+            rta->puntaje = PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
             jug->puntaje += PUNTOS_RESPUESTA_CORRECTA_MENOS_RAPIDA;
         }
     }
-    else if(rta.opcion != '\0') /// si no es correcta, y además respondió algo erróneamente
+    else if(rta->opcion != '\0') /// si no es correcta, y además respondió algo erróneamente
     {
-        rta.puntaje = PUNTOS_RESPUESTA_INCORRECTA;
+        rta->puntaje = PUNTOS_RESPUESTA_INCORRECTA;
         jug->puntaje += PUNTOS_RESPUESTA_INCORRECTA;
     }
+}
 
-    ponerEnCola(&(preg->respuestas), &rta, sizeof(rta));
+void crearColaRespuestas(void *pregunta, unsigned tamInfo, void *recurso)
+{
+    tPregunta *preg;
+
+    if(!pregunta)
+        return;
+
+    preg = (tPregunta *) pregunta;
+
+    crearCola(&(preg->respuestas));
+}
+
+void inicializarMenorTiempoPreguntas(void *pregunta, unsigned tamInfo, void *recurso)
+{
+    tPregunta *preg;
+    tJuego *juego;
+
+    if(!pregunta || !recurso)
+        return;
+
+    preg = (tPregunta *) pregunta;
+    juego = (tJuego *)recurso;
+
+    preg->menorTiempoRespuesta = (byte) juego->tiempoRonda;
+}
+
+void liberarColaRespuestas(void *pregunta, unsigned tamInfo, void *recurso)
+{
+    tPregunta *preg;
+
+    if(!pregunta)
+        return;
+
+    preg = (tPregunta *) pregunta;
+
+    vaciarCola(&(preg->respuestas));
 }
