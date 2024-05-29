@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="app" />
+		<Option pch_mode="2" />
+		<Option compiler="gcc" />
+		<Build>
+			<Target title="Debug">
+				<Option output="bin/Debug/app" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Debug/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-g" />
+				</Compiler>
+			</Target>
+			<Target title="Release">
+				<Option output="bin/Release/app" prefix_auto="1" extension_auto="1" />
+				<Option object_output="obj/Release/" />
+				<Option type="1" />
+				<Option compiler="gcc" />
+				<Compiler>
+					<Add option="-O2" />
+				</Compiler>
+				<Linker>
+					<Add option="-s" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="-Wall" />
+		</Compiler>
+		<Unit filename="../apiConfigs/curlReducido.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../apiConfigs/curlReducido.h" />
+		<Unit filename="../env/archivos.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../env/archivos.h" />
+		<Unit filename="../env/cJSON.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../env/cJSON.h" />
+		<Unit filename="../env/estructuras.h" />
+		<Unit filename="../env/juego.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../env/juego.h" />
+		<Unit filename="../env/pregunta.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../env/pregunta.h" />
+		<Unit filename="../env/teclado.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../env/teclado.h" />
+		<Unit filename="../packages/arbolBinBusq/arbol.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../packages/arbolBinBusq/arbol.h" />
+		<Unit filename="../packages/colaDinamica/cola.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../packages/colaDinamica/cola.h" />
+		<Unit filename="../packages/lista/lista.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../packages/lista/lista.h" />
+		<Unit filename="../userHandler/jugador.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="../userHandler/jugador.h" />
+		<Unit filename="main.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Extensions>
+			<lib_finder disable_auto="1" />
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>
