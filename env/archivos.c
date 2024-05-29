@@ -82,37 +82,6 @@ void generarImpresion(tJuego* juego)
     mapLista(&(juego->jugadores), mostrarSiEsGanador, juego);
 }
 
-/// (recordemos que la cola tiene las respuestas respectivamente a como están los jugadores en la lista)
-/// fn para mapear lista de jugadores
-int mostrarJugadorRespuesta(void *jugador, void *recurso)
-{
-    tJugador *jug;
-    tRespuesta rta;
-    tAuxResumenFinal *recursoResumen;
-
-    if(!jugador || !recurso)
-        return -32;
-
-    recursoResumen = (tAuxResumenFinal *) recurso;
-    jug = (tJugador *)jugador;
-
-    if(sacarDeCola(&(recursoResumen->preg->respuestas), &rta, sizeof(tRespuesta)) == TODO_OK_)
-    {
-        calificarJugadorPorRespuestas(jug, recursoResumen->preg, &rta);
-        if(rta.opcion) /// significa que el jugador respondió algo -bien o mal-
-            fprintf(recursoResumen->juego->salidaActual, "%s: %d %s en contestar\t %c (%s%d)\n", jug->nombre,
-                                                                                 rta.tiempoDeRespuesta,
-                                                                                 rta.tiempoDeRespuesta == 1?"segundo":"segundos",
-                                                                                 rta.opcion,
-                                                                                 rta.puntaje > 0 ? "+" : "",
-                                                                                 rta.puntaje);
-        else /// el jugador no respondió nada
-            fprintf(recursoResumen->juego->salidaActual, "%s: No contesta\t0 puntos\n", jug->nombre);
-    }
-
-    return TODO_OK;
-}
-
 void mostrarResultadosPorConsola(char *nombreArch)
 {
     FILE *pf = fopen(nombreArch, "rt");

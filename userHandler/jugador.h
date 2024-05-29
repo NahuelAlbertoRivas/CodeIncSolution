@@ -13,6 +13,7 @@ int compararIdJugadores(const void *jugador1, const void *jugador2);
 int mostrarOrdenJugador(void *jugador, void *recurso);
 int calcularPuntajePorJugador(void* jugador, void *recurso);
 int compararPuntaje(const void *jugador, const void *ganador);
+int mostrarJugadorRespuesta(void *jugador, void *recurso);
 int mostrarPuntajesTotales(void *jugador, void *recurso);
 int mostrarSiEsGanador(void *jugador, void *recurso);
 

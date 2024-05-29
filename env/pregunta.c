@@ -68,6 +68,38 @@ void intercambiarOpciones(tOpcion* opcionA, tOpcion* opcionB)
     *opcionB = temp;
 }
 
+int mostrarPreguntasAlJugador(void *jugador, void *recurso)
+{
+    tJugador *jug;
+    tJuego *juego;
+
+    if(!jugador || !recurso)
+        return -32;
+
+    juego = (tJuego *) recurso;
+    jug = (tJugador *)jugador;
+
+    juego->rondaActual = 1;
+
+    system("cls");
+    printf("Preparate %s, en 7 segundos comienza tu turno\n",
+                jug->nombre);
+    fflush(stdin); /// por si anteriormente ingresaron enter, ya que esta última tecla tiene doble acción sobre el buffer
+    sleep(7);
+    system("cls");
+    printf("[Tu turno %s]", jug->nombre);
+
+    recorrerEnOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
+
+    printf("\n\nFin de tu turno %s, ingresá cualquier tecla para continuar", jug->nombre);
+    getch();
+    fflush(stdin);
+    system("cls");
+
+    return TODO_OK;
+}
+
+
 void realizarPregunta(void *pregunta, unsigned tamInfo, void *recurso)
 {
     tPregunta *preg;

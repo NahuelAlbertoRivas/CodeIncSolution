@@ -14,6 +14,7 @@ void imprimirPregunta(FILE* salida, const void* pregunta);
 void mezclarOpciones(tOpcion* opciones, int cantOpciones);
 void intercambiarOpciones(tOpcion* opcionA, tOpcion* opcionB);
 
+int mostrarPreguntasAlJugador(void *jugador, void *recurso);
 void realizarPregunta(void *pregunta, unsigned tamInfo, void *recurso);
 void procesarRespuesta(tJuego* juego, tPregunta *pregunta, tRespuesta respuesta);
 void calificarJugadorPorRespuestas(tJugador *jug, tPregunta *preg, tRespuesta *rta);

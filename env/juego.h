@@ -17,10 +17,7 @@ int configurarJuego(tJuego* juego);
 void elegirDificultad(tJuego* juego);
 void mezclar(void* item, int cantElementos, void(*mezclarImpl)(void*, int));
 void mostrarOrdenJuego(tJuego* juego);
-void mostrarInformacionJuego(tJuego* juego);  /// borrar
 void iniciarTrivia(tJuego* juego);
-int mostrarPreguntasAlJugador(void *jugador, void *recurso);
-int mostrarJugadorRespuesta(void *jugador, void *recurso);
 
 void determinarPuntos(tJuego* juego);
 int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores,
