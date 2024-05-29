@@ -548,3 +548,113 @@
 1716999837 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\packages\lista\lista.c
 	"lista.h"
 
+1716862671 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\apiconfigs\curlreducido.c
+	"curlReducido.h"
+	"../env/juego.h"
+
+1716870959 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\apiconfigs\curlreducido.h
+	<curl/curl.h>
+	"../env/pregunta.h"
+	"../env/estructuras.h"
+
+1716996919 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\pregunta.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"cJSON.h"
+	"estructuras.h"
+
+1716422334 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\cjson.h
+	<stddef.h>
+
+1716999485 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\estructuras.h
+	<windows.h>
+	"../packages/arbolBinBusq/arbol.h"
+	"../packages/lista/lista.h"
+	"../packages/colaDinamica/cola.h"
+
+1708028558 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\packages\arbolbinbusq\arbol.h
+	<string.h>
+	<stdlib.h>
+	<stdio.h>
+	<math.h>
+
+1716918403 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\packages\lista\lista.h
+	<stdlib.h>
+	<string.h>
+	<stdio.h>
+	<stdbool.h>
+
+1716870727 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\packages\coladinamica\cola.h
+	<stdlib.h>
+	<string.h>
+
+1716997149 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\juego.h
+	<locale.h>
+	"../apiConfigs/curlReducido.h"
+	"../env/pregunta.h"
+	"../userHandler/jugador.h"
+	"../env/estructuras.h"
+	"../env/teclado.h"
+
+1716996919 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\userhandler\jugador.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"../env/estructuras.h"
+
+1716747336 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\teclado.h
+	<stdio.h>
+	<ctype.h>
+	<conio.h>
+	<time.h>
+	<unistd.h>
+	"estructuras.h"
+
+1716999466 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\archivos.c
+	"archivos.h"
+
+1716995697 c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\archivos.h
+	"juego.h"
+	"estructuras.h"
+
+1716422334 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\cjson.c
+	<string.h>
+	<stdio.h>
+	<math.h>
+	<stdlib.h>
+	<limits.h>
+	<ctype.h>
+	<float.h>
+	<locale.h>
+	"cJSON.h"
+
+1716996803 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\juego.c
+	"juego.h"
+	"archivos.h"
+	"../userHandler/jugador.h"
+	"../apiConfigs/curlReducido.h"
+
+1716774906 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\teclado.c
+	"teclado.h"
+
+1716999034 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\packages\arbolbinbusq\arbol.c
+	"arbol.h"
+
+1716995353 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\packages\coladinamica\cola.c
+	"cola.h"
+
+1716999837 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\packages\lista\lista.c
+	"lista.h"
+
+1716996919 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\userhandler\jugador.c
+	"jugador.h"
+	"../env/pregunta.h"
+
+1716993524 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\app\main.c
+	"../env/juego.h"
+
+1717005871 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution_v3_02\env\pregunta.c
+	"pregunta.h"
+	"juego.h"
+

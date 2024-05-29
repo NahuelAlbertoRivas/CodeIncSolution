@@ -1,13 +1,17 @@
 #include "pregunta.h"
 #include "juego.h"
 
+#define TAM_MAX_OP 14
+
 void parsearPregunta(char* json, tJuego *juego)
 {
     cJSON *json_array = cJSON_Parse(json),
           *item;
     tPregunta preguntaAux;
     byte i,
+         j,
          cantPreguntas;
+    char opcion[TAM_MAX_OP];
 
     cantPreguntas = cJSON_GetArraySize(json_array);
     if (json_array == NULL)
@@ -27,14 +31,17 @@ void parsearPregunta(char* json, tJuego *juego)
 
         preguntaAux.id = rand() * (rand() & 1? -1 : 1);
         strcpy(preguntaAux.pregunta, cJSON_GetObjectItem(item, "pregunta")->valuestring);
-        strcpy(preguntaAux.opciones[0].valor, cJSON_GetObjectItem(item, "resp_correcta")->valuestring);
-        preguntaAux.opciones[0].valida = 1;
-        strcpy(preguntaAux.opciones[1].valor, cJSON_GetObjectItem(item, "opcion_1")->valuestring);
-        preguntaAux.opciones[1].valida = 0;
-        strcpy(preguntaAux.opciones[2].valor, cJSON_GetObjectItem(item, "opcion_2")->valuestring);
-        preguntaAux.opciones[2].valida = 0;
-        strcpy(preguntaAux.opciones[3].valor, cJSON_GetObjectItem(item, "opcion_3")->valuestring);
-        preguntaAux.opciones[3].valida = 0;
+
+        for(j = 0; j < CANT_OPCIONES; j++)
+        {
+            if(j)
+                snprintf(opcion, sizeof(opcion), "opcion_%d", j);
+            else
+                strcpy(opcion, "resp_correcta");
+            strcpy(preguntaAux.opciones[j].valor, cJSON_GetObjectItem(item, opcion)->valuestring);
+            preguntaAux.opciones[j].valida = j ? 0 : 1;
+        }
+
         preguntaAux.nivel = cJSON_GetObjectItem(item, "nivel")->valueint;
         preguntaAux.menorTiempoRespuesta = juego->tiempoRonda;
         preguntaAux.cantMenorTiempoRespuesta = 0;
@@ -90,7 +97,7 @@ int mostrarPreguntasAlJugador(void *jugador, void *recurso)
     system("cls");
     printf("[Tu turno %s]", jug->nombre);
 
-    if(((azar / 2) == 0) || ((jug->id % 3) == 0) )
+    if((azar / 2) == 0)
         recorrerEnOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
     else if(azar > 0)
         recorrerPreOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
@@ -104,7 +111,6 @@ int mostrarPreguntasAlJugador(void *jugador, void *recurso)
 
     return TODO_OK;
 }
-
 
 void realizarPregunta(void *pregunta, unsigned tamInfo, void *recurso)
 {
