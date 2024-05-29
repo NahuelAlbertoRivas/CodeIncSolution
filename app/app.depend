@@ -18,7 +18,7 @@
 1716422334 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\cjson.h
 	<stddef.h>
 
-1716995697 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\estructuras.h
+1716999485 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\estructuras.h
 	<windows.h>
 	"../packages/arbolBinBusq/arbol.h"
 	"../packages/lista/lista.h"
@@ -46,10 +46,10 @@
 	<unistd.h>
 	"estructuras.h"
 
-1716778715 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\archivos.c
+1716999466 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\archivos.c
 	"archivos.h"
 
-1716778707 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\archivos.h
+1716995697 c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\archivos.h
 	"juego.h"
 	"estructuras.h"
 
@@ -64,21 +64,22 @@
 	<locale.h>
 	"cJSON.h"
 
-1716778435 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\juego.c
+1716996803 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\juego.c
 	"juego.h"
 	"archivos.h"
 	"../userHandler/jugador.h"
 	"../apiConfigs/curlReducido.h"
 
-1716778418 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\pregunta.c
+1717000272 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\pregunta.c
 	"pregunta.h"
 	"juego.h"
 
 1716774906 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\env\teclado.c
 	"teclado.h"
 
-1716777440 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\userhandler\jugador.c
+1716996919 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\userhandler\jugador.c
 	"jugador.h"
+	"../env/pregunta.h"
 
 1716993524 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\app\main.c
 	"../env/juego.h"
@@ -538,12 +539,12 @@
 	<stdlib.h>
 	<string.h>
 
-1716995045 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\packages\arbolbinbusq\arbol.c
+1716999034 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\packages\arbolbinbusq\arbol.c
 	"arbol.h"
 
 1716995353 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\packages\coladinamica\cola.c
 	"cola.h"
 
-1716994935 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\packages\lista\lista.c
+1716999837 source:c:\users\admin\n\unlam\ayed\tp\codeincsolution\packages\lista\lista.c
 	"lista.h"
 

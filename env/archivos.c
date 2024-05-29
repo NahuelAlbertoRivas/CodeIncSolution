@@ -72,7 +72,6 @@ void generarImpresion(tJuego* juego)
     tJugador puntajeMaximo;
     byte cantGanadores;
 
-    juego->rondaActual = 1;
     recorrerEnOrdenSimpleArbolBinBusq(&(juego->preguntas), juego, mostrarOpcionesPreguntaConRespuestas);
     fprintf(juego->salidaActual, "Total\n");
     mapLista(&(juego->jugadores), mostrarPuntajesTotales, juego);

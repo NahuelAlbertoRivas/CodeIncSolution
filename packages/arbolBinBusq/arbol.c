@@ -43,6 +43,25 @@ void recorrerEnOrdenSimpleArbolBinBusq(const tArbolBinBusq * p, void * params, v
     recorrerEnOrdenSimpleArbolBinBusq(&(*p)->der, params, accion);
 }
 
+void recorrerPreOrdenSimpleArbolBinBusq(const tArbolBinBusq * p, void * params, void (*accion)(void *, unsigned, void *))
+{
+    if(!*p)
+        return;
+    accion((*p)->info, (*p)->tamInfo, params);
+    recorrerPreOrdenSimpleArbolBinBusq(&(*p)->izq, params, accion);
+    recorrerPreOrdenSimpleArbolBinBusq(&(*p)->der, params, accion);
+}
+
+
+void recorrerPosOrdenSimpleArbolBinBusq(const tArbolBinBusq * p, void * params, void (*accion)(void *, unsigned, void *))
+{
+    if(!*p)
+        return;
+    recorrerPosOrdenSimpleArbolBinBusq(&(*p)->izq, params, accion);
+    recorrerPosOrdenSimpleArbolBinBusq(&(*p)->der, params, accion);
+    accion((*p)->info, (*p)->tamInfo, params);
+}
+
 int buscarElemArbolBinBusq(const tArbolBinBusq *p, void *d, unsigned tam, int (*cmp)(const void *, const void *))
 {
     if(!(p = buscarNodoArbolBinBusq(p,d,cmp)))

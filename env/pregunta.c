@@ -72,6 +72,7 @@ int mostrarPreguntasAlJugador(void *jugador, void *recurso)
 {
     tJugador *jug;
     tJuego *juego;
+    short int azar = rand() * (rand() & 1? -1 : 1);
 
     if(!jugador || !recurso)
         return -32;
@@ -89,7 +90,12 @@ int mostrarPreguntasAlJugador(void *jugador, void *recurso)
     system("cls");
     printf("[Tu turno %s]", jug->nombre);
 
-    recorrerEnOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
+    if(((azar / 2) == 0) || ((jug->id % 3) == 0) )
+        recorrerEnOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
+    else if(azar > 0)
+        recorrerPreOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
+    else
+        recorrerPosOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
 
     printf("\n\nFin de tu turno %s, ingresá cualquier tecla para continuar", jug->nombre);
     getch();
@@ -163,7 +169,7 @@ void mostrarOpcionesPreguntaConRespuestas(void *pregunta, unsigned tamInfo, void
     preg = (tPregunta *) pregunta;
     juego = (tJuego *) recurso;
 
-    fprintf(juego->salidaActual, "%d- %s", juego->rondaActual, preg->pregunta);
+    fprintf(juego->salidaActual, "Pregunta: %s", preg->pregunta);
     for(opcion = 0; opcion < CANT_OPCIONES; opcion++)
         fprintf(juego->salidaActual, "\n\t%c) %s %s", 'A' + opcion,
                                          preg->opciones[opcion].valor,
@@ -171,7 +177,6 @@ void mostrarOpcionesPreguntaConRespuestas(void *pregunta, unsigned tamInfo, void
     fprintf(juego->salidaActual, "\n\n[Respuestas]:\n");
     mostrarRespuestasPorPregunta(preg, juego);
     fprintf(juego->salidaActual, "\n\n");
-    juego->rondaActual++;
 }
 
 void mostrarRespuestasPorPregunta(tPregunta *preg, tJuego *juego)

@@ -106,7 +106,7 @@ int buscarMayorElemNoClaveLista(tLista *pl, void *buffer, unsigned cantBytes, Co
         return LISTA_VACIA;
 
     pl = &((*pl)->sig);
-    res = 1;
+    cant = 1;
 
     while(*pl)
     {
