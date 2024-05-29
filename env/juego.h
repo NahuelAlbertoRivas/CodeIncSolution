@@ -19,8 +19,4 @@ void mezclar(void* item, int cantElementos, void(*mezclarImpl)(void*, int));
 void mostrarOrdenJuego(tJuego* juego);
 void iniciarTrivia(tJuego* juego);
 
-void determinarPuntos(tJuego* juego);
-int obtenerCorrectasEnMenorTiempo(const tJugador* jugadores, int cantJugadores,
-                                  int nroRonda, int menorTiempo);
-
 #endif
