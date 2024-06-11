@@ -48,7 +48,7 @@ void parsearPregunta(char* json, tJuego *juego)
 
         mezclarOpciones(preguntaAux.opciones, CANT_OPCIONES);
 
-        insertarArbolBinBusq(&(juego->preguntas), &preguntaAux, sizeof(tPregunta), compararIdPregunta);
+        ponerEnOrdenConDuplicados(&(juego->preguntas), &preguntaAux, sizeof(tPregunta), compararIdPregunta, NULL);
     }
 
     cJSON_Delete(json_array);
@@ -79,7 +79,6 @@ int mostrarPreguntasAlJugador(void *jugador, void *recurso)
 {
     tJugador *jug;
     tJuego *juego;
-    short int azar = rand() * (rand() & 1? -1 : 1);
 
     if(!jugador || !recurso)
         return -32;
@@ -97,12 +96,7 @@ int mostrarPreguntasAlJugador(void *jugador, void *recurso)
     system("cls");
     printf("[Tu turno %s]", jug->nombre);
 
-    if((azar / 2) == 0)
-        recorrerEnOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
-    else if(azar > 0)
-        recorrerPreOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
-    else
-        recorrerPosOrdenSimpleArbolBinBusq((&juego->preguntas), juego, realizarPregunta);
+    mapLista((&juego->preguntas), realizarPregunta, juego);
 
     printf("\n\nFin de tu turno %s, ingresá cualquier tecla para continuar", jug->nombre);
     getch();
@@ -112,7 +106,7 @@ int mostrarPreguntasAlJugador(void *jugador, void *recurso)
     return TODO_OK;
 }
 
-void realizarPregunta(void *pregunta, unsigned tamInfo, void *recurso)
+int realizarPregunta(void *pregunta, void *recurso)
 {
     tPregunta *preg;
     tJuego *juego;
@@ -120,7 +114,7 @@ void realizarPregunta(void *pregunta, unsigned tamInfo, void *recurso)
     byte opcion;
 
     if(!pregunta || !recurso)
-        return;
+        return ERROR_PARAMETROS;
 
     preg = (tPregunta *) pregunta;
     juego = (tJuego *) recurso;
@@ -135,6 +129,8 @@ void realizarPregunta(void *pregunta, unsigned tamInfo, void *recurso)
 
     procesarRespuesta(juego, preg, respuesta);
     juego->rondaActual++;
+
+    return TODO_OK;
 }
 
 void procesarRespuesta(tJuego* juego, tPregunta *pregunta, tRespuesta respuesta)
@@ -163,14 +159,14 @@ void procesarRespuesta(tJuego* juego, tPregunta *pregunta, tRespuesta respuesta)
     ponerEnCola(&(pregunta->respuestas), &respuesta, sizeof(respuesta));
 }
 
-void mostrarOpcionesPreguntaConRespuestas(void *pregunta, unsigned tamInfo, void *recurso)
+int mostrarOpcionesPreguntaConRespuestas(void *pregunta, void *recurso)
 {
     byte opcion;
     tPregunta *preg;
     tJuego *juego;
 
     if(!pregunta || !recurso)
-        return;
+        return ERROR_PARAMETROS;
 
     preg = (tPregunta *) pregunta;
     juego = (tJuego *) recurso;
@@ -183,6 +179,8 @@ void mostrarOpcionesPreguntaConRespuestas(void *pregunta, unsigned tamInfo, void
     fprintf(juego->salidaActual, "\n\n[Respuestas]:\n");
     mostrarRespuestasPorPregunta(preg, juego);
     fprintf(juego->salidaActual, "\n\n");
+
+    return TODO_OK;
 }
 
 void mostrarRespuestasPorPregunta(tPregunta *preg, tJuego *juego)
@@ -246,40 +244,46 @@ void calificarJugadorPorRespuestas(tJugador *jug, tPregunta *preg, tRespuesta *r
     }
 }
 
-void crearColaRespuestas(void *pregunta, unsigned tamInfo, void *recurso)
+int crearColaRespuestas(void *pregunta, void *recurso)
 {
     tPregunta *preg;
 
     if(!pregunta)
-        return;
+        return ERROR_PARAMETROS;
 
     preg = (tPregunta *) pregunta;
 
     crearCola(&(preg->respuestas));
+
+    return TODO_OK;
 }
 
-void inicializarMenorTiempoPreguntas(void *pregunta, unsigned tamInfo, void *recurso)
+int inicializarMenorTiempoPreguntas(void *pregunta, void *recurso)
 {
     tPregunta *preg;
     tJuego *juego;
 
     if(!pregunta || !recurso)
-        return;
+        return TODO_OK;
 
     preg = (tPregunta *) pregunta;
     juego = (tJuego *)recurso;
 
     preg->menorTiempoRespuesta = (byte) juego->tiempoRonda;
+
+    return TODO_OK;
 }
 
-void liberarColaRespuestas(void *pregunta, unsigned tamInfo, void *recurso)
+int liberarColaRespuestas(void *pregunta, void *recurso)
 {
     tPregunta *preg;
 
     if(!pregunta)
-        return;
+        return ERROR_PARAMETROS;
 
     preg = (tPregunta *) pregunta;
 
     vaciarCola(&(preg->respuestas));
+
+    return TODO_OK;
 }

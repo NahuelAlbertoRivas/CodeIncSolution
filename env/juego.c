@@ -36,7 +36,7 @@ char iniciarJuego()
     switch(opcion)
     {
     case 'A':
-        crearArbolBinBusq(&(juego.preguntas));
+        crearLista(&(juego.preguntas));
         crearLista(&(juego.jugadores));
         if((estado = configurarJuego(&juego)) != OK)
             return estado;
@@ -46,13 +46,12 @@ char iniciarJuego()
         getch();
         system("cls");
         fflush(stdin);
-        recorrerEnOrdenSimpleArbolBinBusq(&(juego.preguntas), &juego, crearColaRespuestas);
+        mapLista(&(juego.preguntas), crearColaRespuestas, &juego);
         iniciarTrivia(&juego);
-        /// mapLista(&(juego.jugadores), calcularPuntajePorJugador, &juego);
         estado = imprimirResultados(&juego);
         vaciarLista(&(juego.jugadores));
-        recorrerEnOrdenSimpleArbolBinBusq(&(juego.preguntas), &juego, liberarColaRespuestas);
-        eliminarArbol(&(juego.preguntas));
+        mapLista(&(juego.preguntas), liberarColaRespuestas, &juego);
+        vaciarLista(&(juego.preguntas));
         return estado;
     case 'B':
         printf("¡Hasta luego!\n");
@@ -70,6 +69,7 @@ int configurarJuego(tJuego* juego)
     if((estado = leerArchivoConfig(juego)) != OK)
         return estado;
 
+    juego->cantJugadores = 0;
     cargarJugadores(juego);
     if(juego->cantJugadores == 0)
         return SIN_JUGADORES;
@@ -78,11 +78,6 @@ int configurarJuego(tJuego* juego)
 
     if ((estado = cargarCURL(&cURL)) != OK)
         return estado;
-
-    ///TODO: chequear las siguientes 3 lineas
-    //    if((estado = verificarConectividad(&cURL)) != OK ){
-    //        return estado;
-    //    }
 
     if(cURL)
         estado = obtenerPreguntas(&cURL, juego, juego->dificultad, juego->cantRondas);
@@ -103,7 +98,7 @@ void elegirDificultad(tJuego* juego)
         {"DIFICIL", DIFICIL}
     };
 
-    fprintf(stdout, "Ingrese la dificultad deseada:\n");
+    fprintf(stdout, "Ingresá la dificultad deseada:\n");
     for(i = 0; i < sizeof(mapeo) / sizeof(tMapeoDificultad); i ++)
         printf("%2c: %15s\n", mapeo[i].nombre[0], mapeo[i].nombre);
     dificultad = captarIngresoDificultad(mapeo, sizeof(mapeo) / sizeof(tMapeoDificultad));
@@ -134,7 +129,7 @@ void mostrarOrdenJuego(tJuego* juego)
 
 void iniciarTrivia(tJuego* juego)
 {
-    recorrerEnOrdenSimpleArbolBinBusq(&(juego->preguntas), juego, inicializarMenorTiempoPreguntas);
+    mapLista(&(juego->preguntas), inicializarMenorTiempoPreguntas, juego);
 
     mapLista(&(juego->jugadores), mostrarPreguntasAlJugador, juego);
 

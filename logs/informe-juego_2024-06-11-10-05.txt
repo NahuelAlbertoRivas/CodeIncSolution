@@ -1,0 +1,71 @@
+Pregunta: ¿Cuál es el pico más alto de Argentina?
+	A) Ojos del Salado 
+	B) Aconcagua (Correcta)
+	C) Cerro Fitz Roy 
+	D) Monte Pissis 
+
+[Respuestas]:
+Ferragamo: 2 segundos en contestar	 B (+1)
+McLaren: 1 segundo en contestar	 B (+1)
+Pagani: 1 segundo en contestar	 B (+1)
+Gumpert: 5 segundos en contestar	 B (+1)
+Koenigsegg: 1 segundo en contestar	 B (+1)
+Giuseppe: 0 segundos en contestar	 B (+3)
+
+
+Pregunta: ¿En qué año Argentina ganó su segunda Copa Mundial de fútbol?
+	A) 1986 (Correcta)
+	B) 1978 
+	C) 2022 
+	D) 1990 
+
+[Respuestas]:
+Ferragamo: 2 segundos en contestar	 A (+1)
+McLaren: 1 segundo en contestar	 A (+1)
+Pagani: 1 segundo en contestar	 A (+1)
+Gumpert: 4 segundos en contestar	 A (+1)
+Koenigsegg: 0 segundos en contestar	 A (+3)
+Giuseppe: 1 segundo en contestar	 C (-2)
+
+
+Pregunta: ¿Quién fue el presidente argentino durante la Guerra de las Malvinas?
+	A) Leopoldo Galtieri (Correcta)
+	B) Donald Trump 
+	C) Raúl Alfonsín 
+	D) Carlos Menem 
+
+[Respuestas]:
+Ferragamo: 3 segundos en contestar	 A (+1)
+McLaren: 1 segundo en contestar	 A (+1)
+Pagani: 0 segundos en contestar	 A (+3)
+Gumpert: 3 segundos en contestar	 A (+1)
+Koenigsegg: 4 segundos en contestar	 C (-2)
+Giuseppe: 1 segundo en contestar	 A (+1)
+
+
+Pregunta: ¿Qué porcentaje del territorio argentino está cubierto por bosques?
+	A) Aproximadamente el 40% 
+	B) Aproximadamente el 10% 
+	C) Aproximadamente el 20% 
+	D) Aproximadamente el 30% (Correcta)
+
+[Respuestas]:
+Ferragamo: 2 segundos en contestar	 D (+1)
+McLaren: 0 segundos en contestar	 D (+3)
+Pagani: 1 segundo en contestar	 D (+1)
+Gumpert: 2 segundos en contestar	 D (+1)
+Koenigsegg: 1 segundo en contestar	 A (-2)
+Giuseppe: 1 segundo en contestar	 D (+1)
+
+
+Total
+	Ferragamo:	  4 puntos
+	McLaren:	  6 puntos
+	Pagani:	  6 puntos
+	Gumpert:	  4 puntos
+	Koenigsegg:	  0 puntos
+	Giuseppe:	  3 puntos
+
+¡¡Felicitaciones ganadoras/es!!:
+	McLaren
+	Pagani

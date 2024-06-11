@@ -2,7 +2,6 @@
 #define ESTRUCTURAS
 
 #include <windows.h>
-#include "../packages/arbolBinBusq/arbol.h"
 #include "../packages/lista/lista.h"
 #include "../packages/colaDinamica/cola.h"
 
@@ -78,8 +77,8 @@ typedef struct
     byte rondaActual;
     short int puntajeMaximo;
     enum eDificultad dificultad;
-    tArbolBinBusq preguntas; //Cambiar a tArbol si considero priorizar memoria antes que complejidad computacional (performance).
-    tLista jugadores; //Cambiar a tArbol si considero priorizar memoria antes que complejidad computacional (performance).
+    tLista preguntas,
+           jugadores;
     FILE *salidaActual;
 } tJuego;
 

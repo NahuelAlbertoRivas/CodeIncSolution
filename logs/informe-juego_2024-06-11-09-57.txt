@@ -1,0 +1,50 @@
+Pregunta: ¿Quién fue el primer presidente de Argentina?
+	A) Mariano Moreno 
+	B) Javier Milei 
+	C) Bernardino Rivadavia (Correcta)
+	D) Bartolomé Mitre 
+
+[Respuestas]:
+jug2: No contesta	0 puntos
+jug1: 4 segundos en contestar	 C (+3)
+
+
+Pregunta: ¿Cuál es el monumento más famoso de la ciudad de Buenos Aires?
+	A) Recoleta 
+	B) Obelisco (Correcta)
+	C) Casa Rosada 
+	D) Teatro Colón 
+
+[Respuestas]:
+jug2: 4 segundos en contestar	 B (+1)
+jug1: 2 segundos en contestar	 B (+3)
+
+
+Pregunta: ¿Cuál es el río más importante de Argentina?
+	A) Río Paraná (Correcta)
+	B) Río de la Plata 
+	C) Río Uruguay 
+	D) Río Paraguay 
+
+[Respuestas]:
+jug2: 1 segundo en contestar	 A (+2)
+jug1: 1 segundo en contestar	 A (+2)
+
+
+Pregunta: ¿Cuál es la capital de Argentina?
+	A) Buenos Aires (Correcta)
+	B) Rosario 
+	C) Córdoba 
+	D) Mendoza 
+
+[Respuestas]:
+jug2: 2 segundos en contestar	 A (+1)
+jug1: 1 segundo en contestar	 A (+3)
+
+
+Total
+	jug2:	  4 puntos
+	jug1:	 11 puntos
+
+¡¡Felicitaciones ganador/a!!:
+	jug1

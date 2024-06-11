@@ -72,7 +72,7 @@ void generarImpresion(tJuego* juego)
     tJugador puntajeMaximo;
     byte cantGanadores;
 
-    recorrerEnOrdenSimpleArbolBinBusq(&(juego->preguntas), juego, mostrarOpcionesPreguntaConRespuestas);
+    mapLista(&(juego->preguntas), mostrarOpcionesPreguntaConRespuestas, juego);
     fprintf(juego->salidaActual, "Total\n");
     mapLista(&(juego->jugadores), mostrarPuntajesTotales, juego);
     cantGanadores = buscarMayorElemNoClaveLista(&(juego->jugadores), &puntajeMaximo, sizeof(tJugador), compararPuntaje);

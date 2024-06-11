@@ -74,7 +74,6 @@ int obtenerPreguntas(CURL** cURL, tJuego* juego, int dificultad, int cantRounds)
     }
 
     parsearPregunta(userData.json, juego);
-    /// mezclar(preguntas, cantRounds, mezclarPreguntas);
 
     return OK;
 }
