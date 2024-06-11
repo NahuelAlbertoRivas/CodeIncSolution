@@ -55,16 +55,21 @@ char imprimirResultados(tJuego* juego)
              fechaHora->tm_min);
 
     if((estado = abrirArchivo(&archInforme, nombreArch, "wt") != OK))
-        return estado;
+        juego->salidaActual = stdin;
+    else
+        juego->salidaActual = archInforme;
 
-    juego->salidaActual = archInforme;
     generarImpresion(juego);
 
-    fclose(archInforme);
+    if(estado == OK)
+    {
+        fclose(archInforme);
+        mostrarResultadosPorConsola(nombreArch);
+    }
+    else
+        printf("\nIMPORTANTE: no se pudo generar el archivo del informe, disculpen las molestias.\n");
 
-    mostrarResultadosPorConsola(nombreArch);
-
-    return OK;
+    return estado;
 }
 
 void generarImpresion(tJuego* juego)
@@ -88,7 +93,7 @@ void mostrarResultadosPorConsola(char *nombreArch)
 
     if(!pf)
     {
-        printf("\nInforme no disponible.\n");
+        printf("\nRuta de informe no disponible.\n");
         return;
     }
 

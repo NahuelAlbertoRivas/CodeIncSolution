@@ -2,14 +2,19 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="..\env\juego.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+	<File name="..\env\pregunta.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3512" topLine="115" />
+			<Cursor1 position="41" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="..\packages\lista\lista.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\userHandler\jugador.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2471" topLine="11" />
+			<Cursor1 position="3855" topLine="116" />
+		</Cursor>
+	</File>
+	<File name="..\env\juego.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="162" topLine="63" />
 		</Cursor>
 	</File>
 	<File name="..\env\pregunta.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -17,49 +22,9 @@
 			<Cursor1 position="958" topLine="7" />
 		</Cursor>
 	</File>
-	<File name="..\packages\lista\lista.c" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\env\archivos.c" open="1" top="1" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="3337" topLine="74" />
-		</Cursor>
-	</File>
-	<File name="..\env\archivos.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="148" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="..\env\estructuras.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="64" topLine="1" />
-		</Cursor>
-	</File>
-	<File name="..\packages\colaDinamica\cola.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="734" topLine="21" />
-		</Cursor>
-	</File>
-	<File name="..\env\juego.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="528" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="..\userHandler\jugador.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="604" topLine="3" />
-		</Cursor>
-	</File>
-	<File name="..\userHandler\jugador.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="367" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="..\packages\colaDinamica\cola.c" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="448" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="..\env\teclado.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3050" topLine="0" />
+			<Cursor1 position="2349" topLine="68" />
 		</Cursor>
 	</File>
 	<File name="..\apiConfigs\curlReducido.c" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -67,24 +32,59 @@
 			<Cursor1 position="2273" topLine="67" />
 		</Cursor>
 	</File>
-	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\env\estructuras.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="88" topLine="0" />
+			<Cursor1 position="64" topLine="1" />
 		</Cursor>
 	</File>
-	<File name="..\apiConfigs\curlReducido.h" open="1" top="1" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\env\juego.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="528" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\packages\colaDinamica\cola.c" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="448" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\apiConfigs\curlReducido.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="44" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="..\env\archivos.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\packages\colaDinamica\cola.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="956" topLine="16" />
+			<Cursor1 position="734" topLine="21" />
 		</Cursor>
 	</File>
-	<File name="..\env\pregunta.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="..\packages\lista\lista.c" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2906" topLine="121" />
+			<Cursor1 position="3337" topLine="83" />
+		</Cursor>
+	</File>
+	<File name="..\packages\lista\lista.h" open="0" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="2471" topLine="11" />
+		</Cursor>
+	</File>
+	<File name="..\env\archivos.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="148" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\userHandler\jugador.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="367" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="..\env\teclado.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3050" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="140" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>
