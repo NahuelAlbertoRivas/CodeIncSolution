@@ -41,7 +41,7 @@ char iniciarJuego()
         if((estado = configurarJuego(&juego)) != OK)
             return estado;
         mostrarOrdenJuego(&juego);
-        printf("\n[Detalles]\nCantidad de rondas: %d\nTiempo por ronda: %d\nTendrán un lapso de 7 segundos para prepararse antes de iniciar\n\n¡Éxitos a todos!\n\nPor favor, ingresen cualquier tecla para continuar",
+        printf("\n[Detalles]\nCantidad de rondas: %d\nTiempo por ronda: %d\n\n¡Éxitos a todos!\n\nPor favor, ingresen cualquier tecla para continuar",
                           juego.cantRondas,     juego.tiempoRonda);
         getch();
         system("cls");
@@ -134,6 +134,6 @@ void iniciarTrivia(tJuego* juego)
     mapLista(&(juego->jugadores), mostrarPreguntasAlJugador, juego);
 
     puts("¡Juego terminado! Ingresen cualquier tecla para ver los resultados");
-    getch();
+    ingresoNoRequerido(CLEAN_BUFFER);
     system("cls");
 }

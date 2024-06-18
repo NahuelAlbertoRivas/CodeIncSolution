@@ -677,7 +677,7 @@
 1716422334 c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\cjson.h
 	<stddef.h>
 
-1718108723 c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\estructuras.h
+1718721228 c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\estructuras.h
 	<windows.h>
 	"../packages/lista/lista.h"
 	"../packages/colaDinamica/cola.h"
@@ -712,7 +712,7 @@
 	<string.h>
 	"../env/estructuras.h"
 
-1716747336 c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\teclado.h
+1718721070 c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\teclado.h
 	<stdio.h>
 	<ctype.h>
 	<conio.h>
@@ -738,7 +738,7 @@
 	<locale.h>
 	"cJSON.h"
 
-1716774906 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\teclado.c
+1718721398 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\teclado.c
 	"teclado.h"
 
 1716999034 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\packages\arbolbinbusq\arbol.c
@@ -750,20 +750,20 @@
 1716999837 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\packages\lista\lista.c
 	"lista.h"
 
-1716996919 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\userhandler\jugador.c
+1718719498 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\userhandler\jugador.c
 	"jugador.h"
 	"../env/pregunta.h"
 
 1716993524 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\app\main.c
 	"../env/juego.h"
 
-1718110846 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\juego.c
+1718721257 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\juego.c
 	"juego.h"
 	"archivos.h"
 	"../userHandler/jugador.h"
 	"../apiConfigs/curlReducido.h"
 
-1718110794 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\pregunta.c
+1718721228 source:c:\users\admin\n\unlam\ayed comp\tp\codeincsolution\env\pregunta.c
 	"pregunta.h"
 	"juego.h"
 

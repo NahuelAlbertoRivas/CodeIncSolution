@@ -23,5 +23,6 @@ char captarIngresoDificultad(const tMapeoDificultad* mapeoDificultades,
                              int cantElementos);
 int esOpcionDificultad(char key, const tMapeoDificultad* mapeoDificultades,
                        int cantElementos);
+void ingresoNoRequerido(char cleanBuffer);
 
 #endif

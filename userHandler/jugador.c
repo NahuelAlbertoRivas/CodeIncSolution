@@ -41,9 +41,9 @@ int compararIdJugadores(const void *jugador1, const void *jugador2)
              *jug2;
 
     if(!jugador1)
-        return -1;
+        return MAYOR_DEFAULT;
     if(!jugador2)
-        return 1;
+        return MENOR_DEFAULT;
 
     jug1 = (tJugador *) jugador1;
     jug2 = (tJugador *) jugador2;
@@ -75,9 +75,9 @@ int compararPuntaje(const void *ganador, const void *jugador)
              *gan;
 
     if(!jugador)
-        return -1;
+        return MAYOR_DEFAULT;
     if(!ganador)
-        return 1;
+        return MENOR_DEFAULT;
 
     jug = (tJugador *) jugador;
     gan = (tJugador *) ganador;
@@ -94,7 +94,7 @@ int mostrarJugadorRespuesta(void *jugador, void *recurso)
     tAuxResumenFinal *recursoResumen;
 
     if(!jugador || !recurso)
-        return -32;
+        return ERROR_PARAMETROS;
 
     recursoResumen = (tAuxResumenFinal *) recurso;
     jug = (tJugador *)jugador;

@@ -81,7 +81,7 @@ int mostrarPreguntasAlJugador(void *jugador, void *recurso)
     tJuego *juego;
 
     if(!jugador || !recurso)
-        return -32;
+        return ERROR_PARAMETROS;
 
     juego = (tJuego *) recurso;
     jug = (tJugador *)jugador;
@@ -89,17 +89,17 @@ int mostrarPreguntasAlJugador(void *jugador, void *recurso)
     juego->rondaActual = 1;
 
     system("cls");
-    printf("Preparate %s, en 7 segundos comienza tu turno\n",
+    printf("Preparate %s, cuando estés listo presioná cualquier tecla\n",
                 jug->nombre);
+    ingresoNoRequerido(CLEAN_BUFFER);
     fflush(stdin); /// por si anteriormente ingresaron enter, ya que esta última tecla tiene doble acción sobre el buffer
-    sleep(7);
     system("cls");
     printf("[Tu turno %s]", jug->nombre);
 
     mapLista((&juego->preguntas), realizarPregunta, juego);
 
     printf("\n\nFin de tu turno %s, ingresá cualquier tecla para continuar", jug->nombre);
-    getch();
+    ingresoNoRequerido(CLEAN_BUFFER);
     fflush(stdin);
     system("cls");
 
@@ -201,9 +201,9 @@ int compararIdPregunta(const void *pregunta1, const void *pregunta2)
               *preg2;
 
     if(!pregunta1)
-        return -1;
+        return MAYOR_DEFAULT;
     if(!pregunta2)
-        return 1;
+        return MENOR_DEFAULT;
 
     preg1 = (tPregunta *)pregunta1;
     preg2 = (tPregunta *)pregunta2;

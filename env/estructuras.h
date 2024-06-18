@@ -6,6 +6,9 @@
 #include "../packages/colaDinamica/cola.h"
 
 #define ERROR_PARAMETROS -2
+#define MAYOR_DEFAULT -1
+#define MENOR_DEFAULT 1
+#define CLEAN_BUFFER 1
 
 enum eDificultad
 {

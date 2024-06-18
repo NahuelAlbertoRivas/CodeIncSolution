@@ -97,3 +97,12 @@ int esOpcionDificultad(char key, const tMapeoDificultad* mapeo, int cantElemento
             return OPCION_VALIDA;
     return OPCION_NO_VALIDA;
 }
+
+/// es fn. es simplemente para mejorar la funcionalidad de la aplicación
+/// está enfocada hacia aquellos ingresos en los que se pide al usuario insertar cualquier tecla para continuar,
+/// de no implementarla el buffer a veces queda cargado con más de un caracter (por ejemplo cuando se ingresa ENTER)
+/// afectando a instancias posteriores inmediatas en que se vuelve a utilizar getch()
+void ingresoNoRequerido(char cleanBuffer)
+{
+    cleanBuffer = getch();
+}
